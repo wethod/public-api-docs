@@ -1075,7 +1075,7 @@ paths:
     post:
       tags: [Timesheet]
       summary: 'Create a timesheet'
-      description: "Required permissions:\n- **timetracking.view**: allows to create resources.\n\n[Here the dedicated support page](https://support.wethod.com/friday/index/#timesheet)."
+      description: "Required permissions:\n- **timetracking.view**: allows to create resources.\n\n[Here the dedicated support page](https://support.wethod.com/friday/index/#timesheet).\n\n:::warning\nDetailed mode is not supported yet.\n:::"
       operationId: createTimesheet
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/CreateTimesheetDto' } } } }
       responses: { 201: { description: 'Returns the created timesheet.', content: { application/json: { schema: { $ref: '#/components/schemas/TimesheetDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
@@ -1091,7 +1091,7 @@ paths:
     patch:
       tags: [Timesheet]
       summary: 'Update a timesheet'
-      description: "Required permissions:\n- **timetracking.view**: allows to update resources.\n\n[Here the dedicated support page](https://support.wethod.com/friday/index/#timesheet)."
+      description: "Required permissions:\n- **timetracking.view**: allows to update resources.\n\n[Here the dedicated support page](https://support.wethod.com/friday/index/#timesheet).\n\n:::warning\nDetailed mode is not supported yet.\n:::"
       operationId: updateTimesheet
       parameters: [{ name: id, in: path, description: 'The ID of the timesheet to update', required: true, schema: { type: integer } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/UpdateTimesheetDto' } } } }
