@@ -246,7 +246,7 @@ paths:
       summary: 'Get a client'
       description: "Required permissions:\n- **crm.view**: allows view all resources.\n\n[Here the dedicated support page](https://support.wethod.com/finance/index/#client-list)."
       operationId: getClient
-      parameters: [{ name: id, in: path, description: 'The ID of the client to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the client to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested client.', content: { application/json: { schema: { $ref: '#/components/schemas/ClientDTO' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
   /api/client:
     post:
@@ -375,7 +375,7 @@ paths:
       summary: 'Get a holiday'
       description: "Required permissions:\n- **settings.company**: allows view of company holidays.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#bank-holidays-planner)."
       operationId: getHoliday
-      parameters: [{ name: id, in: path, description: 'The ID of the holiday to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the holiday to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested holiday.', content: { application/json: { schema: { $ref: '#/components/schemas/HolidayDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
     delete:
       tags: [Holiday]
@@ -548,7 +548,7 @@ paths:
       summary: 'Get a location'
       description: "Required permissions:\n- **settings.company**: allows view of company locations.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#company-locations)."
       operationId: getLocation
-      parameters: [{ name: id, in: path, description: 'The ID of the location to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the location to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested location.', content: { application/json: { schema: { $ref: '#/components/schemas/LocationDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
     delete:
       tags: [Location]
@@ -810,7 +810,7 @@ paths:
       summary: 'Get a production plan stream'
       description: ":::warning\nRequires **Streams** to be enabled in company settings.\n:::\n\nRequired permissions:\n- **production_plan.view**: allows view resources of projects where the user is the PM or the Account.\n- **production_plan.view_other**: allows view resources of projects where the user is not the PM nor the Account.\n\n[Here the dedicated support page](https://support.wethod.com/planning/index/#production-plan)."
       operationId: getProductionPlanStream
-      parameters: [{ name: id, in: path, description: 'The ID of the production plan stream to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the production plan stream to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested production plan stream.', content: { application/json: { schema: { $ref: '#/components/schemas/ProductionPlanStreamDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
   /api/production-streams:
     get:
@@ -826,7 +826,7 @@ paths:
       summary: 'Get a production stream'
       description: ":::warning\nRequires **Streams** to be enabled in company settings.\n:::\n\nRequired permissions:\n- **pipeline.view**: allows view resources of projects where the user is the PM or the Account.\n- **pipeline.view_other**: allows view resources of projects where the user is not the PM nor the Account."
       operationId: getProductionStream
-      parameters: [{ name: id, in: path, description: 'The ID of the production stream to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the production stream to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested production stream.', content: { application/json: { schema: { $ref: '#/components/schemas/ProductionStreamDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
   /api/projects:
     get:
@@ -897,7 +897,7 @@ paths:
       summary: 'Get a project status'
       description: "Required permissions:\n- **project_status.view**: allows view resources of projects where the user is the PM or the Account.\n- **project_status.view_other**: allows view resources of projects where the user is not the PM nor the Account.\n\n[Here the dedicated support page](https://support.wethod.com/friday/index/#project-status)."
       operationId: getProjectStatus
-      parameters: [{ name: id, in: path, description: 'The ID of the project status to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the project status to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested project status.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectStatusDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
     delete:
       tags: ['Project status']
@@ -928,7 +928,7 @@ paths:
       summary: 'Get a job order category'
       description: "Required permissions:\n- **settings.company**: allows view of company job order categories.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#job-order-categories)."
       operationId: getJobOrderCategory
-      parameters: [{ name: id, in: path, description: 'The ID of the job order category to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the job order category to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested job order category.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectTypeDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
   /api/job-order-category-groups:
     get:
@@ -944,7 +944,7 @@ paths:
       summary: 'Get a job order category group'
       description: "Required permissions:\n- **settings.company**: allows view of company job order category groups.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#job-order-categories)."
       operationId: getJobOrderCategoryGroup
-      parameters: [{ name: id, in: path, description: 'The ID of the job order category group to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the job order category group to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: deleted, in: query, description: 'Filter items by deletion status.', required: false, schema: { type: string, default: exclude, enum: [exclude, include, only] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested job order category group.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectTypeGroupDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
   /api/roles:
     get:
@@ -1136,35 +1136,38 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, project_id: { description: 'ID of the project this budget belongs to', type: integer, minimum: 1, example: 1 }, price_list_id: { description: 'ID of the price list associated with this budget', type: integer, minimum: 1, example: 1 }, stream_id: { description: "ID of the stream associated with this budget.\n\n⚠️ Ignored if **Streams** are disabled in company settings.", type: integer, minimum: 1, example: 1 }, version: { description: 'The version of the budget', type: integer, example: 1 }, status: { description: 'The status of the budget', type: string, enum: [DRAFT, SUBMITTED, APPROVED], example: APPROVED }, final_net_price: { description: 'The final net price of the budget in the master currency', type: number, format: float, example: 12000 }, final_net_price_currency: { description: 'The final net price of the budget in the budget currency', type: number, format: float, example: 12000 }, total_external_cost: { description: 'The total external costs of the budget', type: number, format: float, example: 14400 }, total_cost: { description: 'The total cost of the budget', type: number, format: float, example: 10000 }, total_price: { description: 'The total price of the budget', type: number, format: float, example: 15000 }, total_days: { description: 'The total days of the budget', type: number, format: float, example: 20.5 }, is_baseline: { description: 'Whether this budget version is the baseline', type: boolean, example: false }, notes: { description: 'The budget notes', type: string, example: 'Important budget' }, currency: { description: 'The currency code', type: string, example: EUR }, is_currency_enabled: { description: 'Whether custom currency is enabled', type: boolean, example: false } }
       type: object
     ValidationFailedResponse:
-      properties: { key: { description: 'Error unique key', type: string, example: invalid_data }, message: { description: 'Human-readable message describing the error', type: string, example: "You provided invalid data. Check 'failures' for details." }, failures: { description: 'List of validation errors', type: array, items: { properties: { field: { description: 'Name of the field causing the error', type: string }, message: { description: 'Human-readable description of the error', type: string } }, type: object } } }
+      properties: { headers: { default: {  }, oneOf: [{ $ref: '#/components/schemas/ResponseHeaderBag' }] }, content: { type: string, default: '' }, version: { type: string }, status_code: { type: integer }, status_text: { type: string }, charset: { type: string }, callback: { type: string }, encoding_options: { type: integer, default: 64 }, key: { description: 'Error unique key', type: string, example: invalid_data }, message: { description: 'Human-readable message describing the error', type: string, example: "You provided invalid data. Check 'failures' for details." }, failures: { description: 'List of validation errors', type: array, items: { properties: { field: { description: 'Name of the field causing the error', type: string }, message: { description: 'Human-readable description of the error', type: string } }, type: object }, default: {  } } }
       type: object
     UnauthorizedResponse:
-      properties: { key: { description: 'Error unique key', type: string }, message: { description: 'Human-readable message describing the error', type: string } }
+      properties: { headers: { default: {  }, oneOf: [{ $ref: '#/components/schemas/ResponseHeaderBag' }] }, content: { type: string, default: '' }, version: { type: string }, status_code: { type: integer }, status_text: { type: string }, charset: { type: string }, callback: { type: string }, encoding_options: { type: integer, default: 64 }, key: { description: 'Error unique key', type: string }, message: { description: 'Human-readable message describing the error', type: string } }
       type: object
     ForbiddenResponse:
-      properties: { key: { description: 'Error unique key', type: string }, message: { description: 'Human-readable message describing the error', type: string } }
+      properties: { headers: { default: {  }, oneOf: [{ $ref: '#/components/schemas/ResponseHeaderBag' }] }, content: { type: string, default: '' }, version: { type: string }, status_code: { type: integer }, status_text: { type: string }, charset: { type: string }, callback: { type: string }, encoding_options: { type: integer, default: 64 }, key: { description: 'Error unique key', type: string }, message: { description: 'Human-readable message describing the error', type: string } }
       type: object
     NotFoundResponse:
-      properties: { key: { description: 'Error unique key', type: string, example: not_found }, message: { description: 'Human-readable message describing the error', type: string } }
+      properties: { headers: { default: {  }, oneOf: [{ $ref: '#/components/schemas/ResponseHeaderBag' }] }, content: { type: string, default: '' }, version: { type: string }, status_code: { type: integer }, status_text: { type: string }, charset: { type: string }, callback: { type: string }, encoding_options: { type: integer, default: 64 }, key: { description: 'Error unique key', type: string, example: not_found }, message: { description: 'Human-readable message describing the error', type: string } }
       type: object
     PreconditionFailedResponse:
-      properties: { key: { description: 'Error unique key', type: string, example: precondition_failure }, message: { description: 'Human-readable message describing the error', type: string } }
+      properties: { headers: { default: {  }, oneOf: [{ $ref: '#/components/schemas/ResponseHeaderBag' }] }, content: { type: string, default: '' }, version: { type: string }, status_code: { type: integer }, status_text: { type: string }, charset: { type: string }, callback: { type: string }, encoding_options: { type: integer, default: 64 }, key: { description: 'Error unique key', type: string, example: precondition_failure }, message: { description: 'Human-readable message describing the error', type: string } }
       type: object
     BudgetAreaDto:
       required: [id, created_at, updated_at, name, is_enabled, type, total_external_cost, total_cost, total_price, total_days, budget_id, price_list_id, stream_id]
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, name: { description: 'The name of the budget area', type: string, example: Marketing }, is_enabled: { description: 'Whether the budget area is enabled', type: boolean, example: true }, type: { description: 'The type of the budget area', type: string, enum: [DEFAULT, CONTINGENCY-DISCOUNT, TRAVEL-CORE-COST-EXPENSES, PM], example: DEFAULT }, total_external_cost: { description: 'The total external cost of the budget area', type: number, format: float, example: 3.2 }, total_cost: { description: 'The total cost of the budget area', type: number, format: float, example: 50.2 }, total_price: { description: 'The total price of the budget area', type: number, format: float, example: 100.5 }, total_days: { description: 'The total days of the budget area', type: number, format: float, example: 3.5 }, budget_id: { description: 'ID of the budget to which this area belongs', type: integer, minimum: 1, example: 1 }, price_list_id: { description: 'ID of the price list associated with this budget area', type: integer, minimum: 1, example: 1 }, stream_id: { description: "ID of the stream associated with this budget area.\n\n⚠️ Ignored if **Streams** are disabled in company settings.", type: integer, minimum: 1, example: 1 } }
       type: object
     CreateBudgetAreaDto:
-      required: [name]
+      required: [name, budget_id]
       properties: { name: { description: 'The budget area name', type: string, maxLength: 255, example: 'Area 1' }, budget_id: { description: 'The id of the budget where we want to create the budget area', type: integer, example: 1 } }
       type: object
     UpdateBudgetAreaDto:
+      required: [id]
       properties: { name: { description: 'The budget area name', type: string, maxLength: 255, example: 'Area 1' }, enabled: { description: 'Whether the budget area is enabled or not', type: boolean, example: true }, price_list_id: { description: 'ID of the price list to associate with this budget area', type: integer, example: 1 }, stream_id: { description: "ID of the stream to associate with this budget area.\n\n⚠️ Ignored if **Streams** are disabled in company settings.", type: integer, example: 1 } }
       type: object
     CreateBudgetDto:
+      required: [project_id]
       properties: { project_id: { description: 'ID of the project for which to create a budget', type: integer, example: 1234 }, price_list_id: { description: 'ID of the default price list to associate with this budget', type: integer, example: 1 }, stream_id: { description: "ID of the default stream to associate with this budget.\n\n⚠️ Ignored if **Streams** are disabled in company settings.", type: integer, example: 1 }, template_id: { description: 'ID of the budget template used to create the budget', type: integer, example: 1 }, final_net_price: { description: 'Final net price of the budget. If not provided, it will be calculated based on the project estimate', type: number, format: float, minimum: 0, example: 15000 }, notes: { description: 'Additional notes about the budget', type: string, example: 'Initial budget proposal for Q2 marketing campaign' } }
       type: object
     UpdateBudgetDto:
+      required: [id]
       properties: { price_list_id: { description: 'ID of the default price list to associate with this budget', type: integer, example: 1 }, stream_id: { description: "ID of the default stream to associate with this budget.\n\n⚠️ Ignored if **Streams** are disabled in company settings.", type: integer, example: 1 }, final_net_price: { description: 'The final net price of the budget in the master currency', type: number, example: 1500.5 }, final_net_price_currency: { description: 'The final net price of the budget in the budget currency', type: number, example: 1200.75 }, currency_enabled: { description: 'Whether multicurrency is enabled for the budget', type: boolean, example: true }, currency: { description: 'The currency code for the budget', type: string, example: EUR }, notes: { description: 'Notes about the budget', type: string, example: 'Budget notes and additional information' } }
       type: object
     BudgetDayDto:
@@ -1172,7 +1175,7 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, days: { description: 'The amount of days', type: number, format: float, example: 100 }, uid: { description: 'The unique identifier of the budget day', type: string, example: uid_01a2bcd3e4f56 }, budget_job_title_id: { description: 'The ID of the budget job title', type: integer, minimum: 1, example: 1 }, budget_price_list_level_id: { description: 'The ID of the budget price list level', type: integer, minimum: 1, example: 1 }, budget_task_id: { description: 'The ID of the budget task', type: integer, minimum: 1, example: 1 } }
       type: object
     UpdateBudgetDayDto:
-      required: [days]
+      required: [id, days]
       properties: { days: { description: 'The number of days', type: float, example: 1 } }
       type: object
     BudgetJobTitleDto:
@@ -1187,6 +1190,7 @@ components:
       properties: { message: { description: 'The message to be sent to the PM of the project', type: string, example: 'I cannot approve this budget' } }
       type: object
     SubmitBudgetDto:
+      required: [approver_id]
       properties: { approver_id: { description: 'ID of the employee who is approving the budget', type: integer, example: 1 }, message: { description: 'The message to be sent to the approver', type: string, example: 'Please approve the budget' } }
       type: object
     BudgetTaskDto:
@@ -1194,10 +1198,11 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, uid: { description: 'The unique identifier of the task', type: string, example: uid_01a2bcd3e4f56 }, name: { description: 'The name of the task', type: string, maxLength: 255, example: Development }, currency: { description: 'The currency code of the task', type: string, example: EUR }, external_cost: { description: 'The external costs of the task', type: number, format: float, example: 1000 }, markup: { description: 'The markup to apply to external costs of the task', type: integer, example: 20 }, total_cost: { description: 'The total cost of the task', type: number, format: float, example: 1200 }, total_price: { description: 'The total price of the task', type: number, format: float, example: 1440 }, total_days: { description: 'The total days of the task', type: number, format: float, example: 5.5 }, type: { description: "The type of the task.<br>\n        The type of percentage task in Contingency & Discount area is CREATIVITY.<br>The type of normal task in user created area is DEFAULT", type: string, enum: [DEFAULT, DISCOUNT, CONTINGENCY, TRAVEL, EXPENSE, CREATIVITY, PRODUCT, PM, PRODUCT-EDIT], example: DEFAULT }, is_deleted: { description: 'Whether the task is deleted', type: boolean, example: false }, notes: { description: 'The notes of the task', type: string, example: 'Important task' }, product_id: { description: "The ID of the product linked to this task. This is only used if the task is of type 'PRODUCT'", type: integer, minimum: 1, example: 1 }, quantity: { description: "The quantity related to the task. This is only used if the task is of type 'CONTINGENCY', 'DISCOUNT', 'CREATIVITY' or 'PRODUCT'", type: integer, minimum: 0, example: 1 }, budget_area_id: { description: 'The ID of the budget area this task belongs to', type: integer, minimum: 1, example: 1 } }
       type: object
     CreateBudgetTaskDto:
-      required: [name]
+      required: [name, budget_area_id]
       properties: { name: { description: 'The name of the task', type: string, maxLength: 255, example: Development }, external_cost: { description: 'The external costs of the task', type: float, example: 1000 }, markup: { description: 'The markup to apply to external costs of the task', type: integer, example: 20 }, notes: { description: 'The notes of the task', type: string, maxLength: 255, example: 'This is a note' }, quantity: { description: "The quantity related to the task. This is only used if the task is of type 'CONTINGENCY', 'DISCOUNT', 'CREATIVITY' or 'PRODUCT'", type: integer, minimum: 0, example: 1 }, budget_area_id: { description: 'ID of the budget area to which the task belongs', type: integer, example: 1 }, currency: { description: 'The currency code of the task. If null, master currency is taken.', type: string, example: USD } }
       type: object
     UpdateBudgetTaskDto:
+      required: [id]
       properties: { name: { description: 'The name of the task', type: string, maxLength: 255, example: Development }, external_cost: { description: 'The external costs of the task', type: float, example: 1000 }, markup: { description: 'The markup to apply to external costs of the task', type: integer, example: 20 }, notes: { description: 'The notes of the task', type: string, example: 'This is a note' }, quantity: { description: "The quantity related to the task. This is only used if the task is of type 'CONTINGENCY', 'DISCOUNT', 'CREATIVITY', 'PRODUCT' or 'PRODUCT-EDIT'", type: integer, minimum: 0, example: 1 }, total_price: { description: "The total price of the task - can be updated only if the task is of type 'PRODUCT'", type: float, example: 1200 }, currency: { description: 'The currency code of the task. If null, master currency is taken.', type: string, example: USD } }
       type: object
     BusinessUnitDto:
@@ -1213,6 +1218,7 @@ components:
       properties: { corporate_name: { description: 'Corporate name of the client', type: string, maxLength: 255, example: 'Test Client' }, acronym: { description: 'Acronym of client name', type: string, maxLength: 50, example: 'TST CLT' }, email: { description: 'Email address of the client', type: string, maxLength: 80, example: example@example.com }, notes: { description: 'Notes about the client', type: string, example: 'Example client notes' }, website: { description: 'Client website', type: string, maxLength: 250, example: 'https://example.com' }, linkedin: { description: 'Client linkedin profile', type: string, maxLength: 250, example: 'https://linkedin.com/in/example' }, description: { description: 'Client description', type: string, example: 'Example client description' }, street: { description: 'Client street address', type: string, maxLength: 80, example: '123 Main Street' }, zip_code: { description: 'Client zip code', type: string, maxLength: 80, example: '12345' }, town: { description: 'Client town', type: string, maxLength: 80, example: Toronto }, country: { description: "Client country name. \n    The list of all accepted country name is available at https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes. \n    It is also accepted the Italian version of a country name.", type: string, maxLength: 80, example: Canada }, vat: { description: 'Client VAT number', type: string, maxLength: 80, example: '1234567890' }, payment_condition: { description: 'Client payment condition', type: string, example: '30 days' }, sdi_code: { description: 'Client sdi code', type: string, example: '1234567890' }, pec: { description: 'Client pec', type: string, maxLength: 320, example: pec.client@example.com }, administration_email: { description: 'Client pec', type: string, maxLength: 320, example: pec.administration@example.com }, company_registration_number: { description: 'Client registration number', type: string, example: '1234567890' }, legal_name: { description: 'Client legal name', type: string, maxLength: 255, example: 'Legal Name Inc.' }, intent_code: { description: 'Client intent code', type: string, maxLength: 250, example: INTENT123 }, intent_date: { description: 'Client intent date in YYYY-MM-DD format', type: string, format: date, example: '2023-01-01' }, phone: { description: 'Client phone number', type: string, example: '+393455667987' }, tax_reference: { description: 'Client tax reference', type: string, example: IT12345678901 }, group_id: { description: 'ID of the group to associate with this client', type: integer, example: 1 }, bank_account_id: { description: 'ID of the bank account to associate with this client', type: integer, example: 1 }, vat_rate_id: { description: 'ID of the vat rate to associate with this client', type: integer, example: 1 }, payment_term_id: { description: 'ID of the payment term to associate with this client', type: integer, example: 1 } }
       type: object
     UpdateClientDto:
+      required: [id]
       properties: { corporate_name: { description: 'Corporate name of the client', type: string, maxLength: 255, example: 'Test Client' }, acronym: { description: 'Acronym of client name', type: string, maxLength: 50, example: 'TST CLT' }, email: { description: 'Email address of the client', type: string, maxLength: 80, example: example@example.com }, notes: { description: 'Notes about the client', type: string, example: 'Example client notes' }, website: { description: 'Client website', type: string, maxLength: 250, example: 'https://example.com' }, linkedin: { description: 'Client linkedin profile', type: string, maxLength: 250, example: 'https://linkedin.com/in/example' }, description: { description: 'Client description', type: string, example: 'Example client description' }, street: { description: 'Client street address', type: string, maxLength: 80, example: '123 Main Street' }, zip_code: { description: 'Client zip code', type: string, maxLength: 80, example: '12345' }, town: { description: 'Client town', type: string, maxLength: 80, example: Toronto }, country: { description: "Client country name. \n    The list of all accepted country name is available at https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes. \n    It is also accepted the Italian version of a country name.", type: string, maxLength: 80, example: Canada }, vat: { description: 'Client VAT number', type: string, maxLength: 80, example: '1234567890' }, payment_condition: { description: 'Client payment condition', type: string, example: '30 days' }, sdi_code: { description: 'Client sdi code', type: string, example: '1234567890' }, pec: { description: 'Client pec', type: string, maxLength: 320, example: pec.client@example.com }, administration_email: { description: 'Client pec', type: string, maxLength: 320, example: pec.administration@example.com }, company_registration_number: { description: 'Client registration number', type: string, example: '1234567890' }, legal_name: { description: 'Client legal name', type: string, maxLength: 255, example: 'Legal Name Inc.' }, intent_code: { description: 'Client intent code', type: string, maxLength: 250, example: INTENT123 }, intent_date: { description: 'Client intent date in YYYY-MM-DD format', type: string, format: date, example: '2023-01-01' }, phone: { description: 'Client phone number', type: string, example: '+393455667987' }, tax_reference: { description: 'Client tax reference', type: string, example: IT12345678901 }, group_id: { description: 'ID of the group to associate with this client', type: integer, example: 1 }, bank_account_id: { description: 'ID of the bank account to associate with this client', type: integer, example: 1 }, vat_rate_id: { description: 'ID of the vat rate to associate with this client', type: integer, example: 1 }, payment_term_id: { description: 'ID of the payment term to associate with this client', type: integer, example: 1 } }
       type: object
     ContactDto:
@@ -1220,10 +1226,11 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, client_id: { description: 'ID of the client', type: integer, minimum: 1, example: 1 }, email: { type: string, maxLength: 150, example: client@email.com }, name: { type: string, maxLength: 100, example: 'Client name' }, surname: { type: string, maxLength: 100, example: 'Client surname' }, role: { type: string, maxLength: 75, example: 'Client role' }, notes: { type: string, example: 'Some notes about the client' }, linkedin: { type: string, maxLength: 250, example: 'https://www.linkedin.com/in/example' }, description: { type: string, example: 'A brief description of the client' }, telephone: { type: integer, maxLength: 100, example: '123456789' } }
       type: object
     CreateContactRequestDTO:
-      required: [email, name, surname]
+      required: [email, name, surname, client_id]
       properties: { email: { description: 'Email of the contact', type: string, example: fake@email.com }, name: { description: 'Name of the contact', type: string, example: Name }, surname: { description: 'Surname of the contact', type: string, example: Surname }, role: { description: 'Role of the contact', type: string, example: Role }, notes: { description: 'Notes of the contact', type: string, example: Notes }, linkedin: { description: 'Linkedin of the contact', type: string, example: 'Linkedin link' }, description: { description: 'Description of the contact', type: string, example: 'Description of the contact' }, client_id: { description: 'ID of the client to associate with this contact', type: integer, example: 1 } }
       type: object
     UpdateContactRequestDTO:
+      required: [id]
       properties: { email: { description: 'Email of the contact', type: string, example: fake@email.com }, name: { description: 'Name of the contact', type: string, example: Name }, surname: { description: 'Surname of the contact', type: string, example: Surname }, role: { description: 'Role of the contact', type: string, example: Role }, notes: { description: 'Notes of the contact', type: string, example: Notes }, linkedin: { description: 'Linkedin of the contact', type: string, example: 'Linkedin link' }, description: { description: 'Description of the contact', type: string, example: 'Description of the contact' }, client_id: { description: 'ID of the client to associate with this contact', type: integer, example: 1 } }
       type: object
     EmployeePayrollDto:
@@ -1235,6 +1242,7 @@ components:
       properties: { person_id: { description: 'The ID of the person', type: integer, example: 1 }, business_unit_id: { description: 'The ID of the business unit', type: integer, example: 1, nullable: true }, cost: { description: 'The yearly cost of the person payroll (excluding taxes)', type: number, example: 12000 }, taxes: { description: 'The total taxes of the person payroll', type: integer, example: 10 }, from: { description: 'The start date of the person payroll period', type: date, format: YYYY-MM, example: 2025-01 }, to: { description: 'The end date of the person payroll period', type: date, format: YYYY-MM, example: 2025-12 } }
       type: object
     UpdateEmployeePayrollDto:
+      required: [id]
       properties: { person_id: { description: 'The ID of the person', type: integer, example: 1, nullable: true }, business_unit_id: { description: 'The ID of the business unit', type: integer, example: 1, nullable: true }, cost: { description: 'The yearly cost of the person payroll (excluding taxes)', type: number, example: 12000, nullable: true }, taxes: { description: 'The total taxes of the person payroll', type: integer, example: 10, nullable: true }, from: { description: 'The start date of the person payroll period', type: date, format: YYYY-MM, example: 2025-01, nullable: true }, to: { description: 'The end date of the person payroll period', type: date, format: YYYY-MM, example: 2025-12, nullable: true } }
       type: object
     HolidayDto:
@@ -1246,6 +1254,7 @@ components:
       properties: { name: { description: 'The holiday name', type: string, maxLength: 255, example: "New Year's Day" }, repeating: { description: 'Is repeating holiday', type: boolean, example: true }, exact_date: { description: 'Holiday date. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, repeating_day: { description: 'Holiday repeating day', type: integer, maximum: 31, minimum: 1, example: 1 }, repeating_month: { description: 'Holiday repeating month', type: integer, maximum: 12, minimum: 1, example: 1 } }
       type: object
     UpdateHolidayDto:
+      required: [id]
       properties: { name: { description: 'The holiday name', type: string, maxLength: 255, example: "New Year's Day" }, repeating: { description: 'Is repeating holiday', type: boolean, example: false }, exact_date: { description: 'Holiday date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2025-01-01' }, repeating_day: { description: 'Holiday repeating day', type: integer, maximum: 31, minimum: 1, example: null }, repeating_month: { description: 'Holiday repeating month', type: integer, maximum: 12, minimum: 1, example: null } }
       type: object
     HolidayLocationDto:
@@ -1261,10 +1270,11 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, status: { description: 'The invoice status', type: string, enum: [draft, sent, paid], example: draft }, invoice_number: { description: 'The invoice number', type: string, example: INV-2024-001, nullable: true }, purchase_order: { description: 'The invoice purchase order reference', type: string, nullable: true }, value: { description: 'The invoice value', type: number, format: float, example: 1000 }, exchange_rate: { description: 'The invoice custom exchange rate', type: number, format: float, nullable: true }, issue_date: { description: 'The invoice issue date', type: date, format: YYYY-MM-DD, example: '2024-06-15' }, payment_date: { description: 'The invoice payment date', type: date, format: YYYY-MM-DD, nullable: true }, notes: { description: 'The invoice notes', type: string, nullable: true }, project_id: { description: 'The ID of the project associated with this invoice', type: integer, minimum: 1, example: 1 }, budget_area_uid: { description: 'The UID of the budget area associated with this invoice', type: string, nullable: true }, vat_rate_id: { description: 'The ID of the VAT rate associated with this invoice', type: integer, nullable: true }, payment_term_id: { description: 'The ID of the payment term associated with this invoice', type: integer, nullable: true } }
       type: object
     CreateInvoiceDto:
-      required: [value, issue_date]
+      required: [value, issue_date, project_id]
       properties: { invoice_number: { description: 'The invoice number', type: string, maxLength: 255, nullable: true }, purchase_order: { description: 'The invoice purchase order reference', type: string, nullable: true }, value: { description: 'The invoice value', type: number, format: float, example: 1000 }, exchange_rate: { description: 'The invoice custom exchange rate', type: number, format: float, nullable: true }, issue_date: { description: 'The invoice issue date', type: date, format: YYYY-MM-DD, example: '2024-06-15' }, notes: { description: 'The invoice notes', type: string, nullable: true }, project_id: { description: 'The ID of the project to associate with this invoice', type: integer, example: 1 }, budget_area_uid: { description: 'The UID of the budget area to associate with this invoice', type: string, nullable: true }, vat_rate_id: { description: 'The ID of the VAT rate to associate with this invoice', type: integer, nullable: true }, payment_term_id: { description: 'The ID of the payment term to associate with this invoice', type: integer, nullable: true } }
       type: object
     UpdateInvoiceDto:
+      required: [id]
       properties: { invoice_number: { description: 'The invoice number', type: string, maxLength: 255, nullable: true }, purchase_order: { description: 'The invoice purchase order reference', type: string, nullable: true }, value: { description: 'The invoice value', type: number, format: float, example: 1000 }, exchange_rate: { description: 'The invoice custom exchange rate', type: number, format: float, nullable: true }, issue_date: { description: 'The invoice issue date', type: date, format: YYYY-MM-DD, example: '2024-06-15' }, notes: { description: 'The invoice notes', type: string, nullable: true }, project_id: { description: 'The ID of the project to associate with this invoice', type: integer, example: 1 }, budget_area_uid: { description: 'The UID of the budget area to associate with this invoice', type: string, nullable: true }, vat_rate_id: { description: 'The ID of the VAT rate to associate with this invoice', type: integer, nullable: true }, payment_term_id: { description: 'The ID of the payment term to associate with this invoice', type: integer, nullable: true } }
       type: object
     SendInvoiceDto:
@@ -1290,6 +1300,7 @@ components:
       properties: { name: { description: 'The location name', type: string, maxLength: 255, example: Rome }, default: { description: 'Is default location', type: boolean, example: true } }
       type: object
     UpdateLocationDto:
+      required: [id]
       properties: { name: { description: 'The location name', type: string, maxLength: 255, example: Rome }, default: { description: 'Is default location', type: boolean, example: true } }
       type: object
     MetadataDTO:
@@ -1309,10 +1320,11 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, date: { type: string, format: date }, hours: { type: integer, maximum: 8, minimum: 0, example: 4 }, project_id: { description: 'ID of the project related to this allocation', type: integer, minimum: 1, example: 1 }, person_id: { description: 'ID of the person related to this allocation', type: integer, minimum: 1, example: 1 }, deleted_at: { description: 'The date and time when the resource was deleted', type: string, format: date-time } }
       type: object
     CreatePlanningRequestDTO:
-      required: [project_id, date, hours]
+      required: [person_id, project_id, date, hours]
       properties: { person_id: { description: 'ID of the person to associate with this allocation', type: integer, example: 1 }, project_id: { description: 'ID of the project to associate with this allocation', type: integer, example: 12 }, date: { description: 'Allocation date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-12-03' }, hours: { description: 'Allocation total hours', type: integer, maximum: 8, minimum: 1, example: 4 } }
       type: object
     UpdatePlanningRequestDTO:
+      required: [id]
       properties: { hours: { description: 'Allocation total hours', type: integer, maximum: 8, minimum: 1, example: 4 } }
       type: object
     EmployeeDto:
@@ -1320,6 +1332,7 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, email: { description: 'The person email', type: string, maxLength: 50, example: john.doe@example.com }, name: { description: 'The person name', type: string, maxLength: 50, example: John }, surname: { description: 'The person surname', type: string, maxLength: 50, example: Doe }, role_id: { description: 'ID of the role associated with this person', type: integer, minimum: 1, example: 1 }, role: { description: 'The person role', type: string, maxLength: 50, example: 'super user' }, is_archived: { description: 'Whether the person is archived', type: boolean, example: false }, is_visible_in_people_allocation: { description: 'Whether the person is visible in people allocation', type: boolean, example: true }, has_timesheet_required: { description: 'Whether the person needs to fill in timesheet', type: boolean, example: true }, level_id: { description: 'ID of the level associated with this person', type: integer, minimum: 1, example: 1 }, stream_id: { description: "ID of the stream associated with this person.\n\n⚠️ Ignored if **Streams** are disabled in company settings.", type: integer, minimum: 1, example: 1 }, price_list_id: { description: 'ID of the price list associated with this person', type: integer, minimum: 1, example: 1 }, job_title_id: { description: 'ID of the job title associated with this person', type: integer, minimum: 1, example: 1 }, allocation_manager_id: { description: 'ID of the allocation manager associated with this person', type: integer, minimum: 1, example: 1 }, capacity_id: { description: 'ID of the capacity associated with this person', type: integer, minimum: 1, example: 1 }, location_id: { description: 'ID of the location associated with this person', type: integer, minimum: 1, example: 1 } }
       type: object
     PatchEmployeeDto:
+      required: [id]
       properties: { name: { description: 'The person name', type: string, maxLength: 50, example: John }, surname: { description: 'The person surname', type: string, maxLength: 50, example: Doe }, role_id: { description: 'ID of the role to associate with this person', type: integer, example: 1 }, is_archived: { description: 'Whether the person is archived', type: boolean, example: false }, is_visible_in_people_allocation: { description: 'Whether the person is visible in people allocation', type: boolean, example: true }, has_timesheet_required: { description: 'Whether the person needs to fill in timesheet', type: boolean, example: true }, level_id: { description: 'ID of the level to associate with this person', type: integer, example: 1 }, price_list_id: { description: 'ID of the price list to associate with this person', type: integer, example: 1 }, job_title_id: { description: 'ID of the job title to associate with this person', type: integer, example: 1 }, allocation_manager_id: { description: 'ID of the allocation manager to associate with this person', type: integer, example: 1 }, capacity_id: { description: 'ID of the capacity to associate with this person', type: integer, example: 1 }, location_id: { description: 'ID of the location to associate with this person', type: integer, example: 1 } }
       type: object
     PriceListDto:
@@ -1328,17 +1341,19 @@ components:
       type: object
     CreatePriceListDto:
       required: [name]
-      properties: { client_id: { description: 'ID of the client to associate with this price list', type: integer, example: 1234 }, name: { description: 'The price list name', type: string, maxLength: 255, example: 'Price List 1' }, description: { description: 'The price list description', type: string, maxLength: 50, example: 'Price List description' }, available_from: { description: 'The date from which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, available_to: { description: 'The date until which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, is_default_for_client: { description: 'Whether this price list is the default for the client', type: boolean, example: false }, sync_with_company_default: { description: 'Whether this price list is synced with the company default costs', type: boolean, example: false } }
+      properties: { client_id: { description: 'ID of the client to associate with this price list', type: integer, example: 1234 }, name: { description: 'The price list name', type: string, maxLength: 255, example: 'Price List 1' }, description: { description: 'The price list description', type: string, maxLength: 50, example: 'Price List description' }, available_from: { description: 'The date from which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, available_to: { description: 'The date until which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, is_default_for_client: { description: 'Whether this price list is the default for the client', type: boolean, default: false, example: false }, sync_with_company_default: { description: 'Whether this price list is synced with the company default costs', type: boolean, default: false, example: false } }
       type: object
     UpdatePriceListDto:
-      properties: { client_id: { description: 'ID of the client to associate with this price list', type: integer, example: 1234 }, name: { description: 'The price list name', type: string, maxLength: 255, example: 'Price List 1' }, description: { description: 'The price list description', type: string, maxLength: 50, example: 'Price List description' }, available_from: { description: 'The date from which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, available_to: { description: 'The date until which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, is_default_for_client: { description: 'Whether this price list is the default for the client', type: boolean, example: false }, sync_with_company_default: { description: 'Whether this price list is synced with the company default costs', type: boolean, example: false } }
+      required: [id]
+      properties: { client_id: { description: 'ID of the client to associate with this price list', type: integer, example: 1234 }, name: { description: 'The price list name', type: string, maxLength: 255, example: 'Price List 1' }, description: { description: 'The price list description', type: string, maxLength: 50, example: 'Price List description' }, available_from: { description: 'The date from which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, available_to: { description: 'The date until which the price list is available. This follows the YYYY-MM-DD format', type: string, format: date, example: null }, is_default_for_client: { description: 'Whether this price list is the default for the client', type: boolean, default: false, example: false }, sync_with_company_default: { description: 'Whether this price list is synced with the company default costs', type: boolean, default: false, example: false } }
       type: object
     PriceListLevelDto:
       required: [id, created_at, updated_at, price, cost]
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, price_list_id: { description: 'ID of the price list', type: integer, minimum: 1, example: 1 }, level_id: { description: 'ID of the level', type: integer, minimum: 1, example: 1 }, price: { description: 'The price of the price list level', type: integer, example: 1 }, cost: { description: 'The price of the price list level', type: integer, example: 1 } }
       type: object
     UpdatePriceListLevelDto:
-      properties: { price: { description: 'The price of the price list level', type: integer, example: 1 }, cost: { description: 'The cost of the price list level', type: integer, example: 1 } }
+      required: [id]
+      properties: { price: { description: 'The price of the price list level', type: integer, default: 0, example: 1 }, cost: { description: 'The cost of the price list level', type: integer, default: 0, example: 1 } }
       type: object
     ProductDto:
       required: [id, created_at, updated_at, name, description, external_cost, markup]
@@ -1346,7 +1361,7 @@ components:
       type: object
     CreateProductDto:
       required: [name]
-      properties: { name: { description: 'The product name', type: string, maxLength: 50, example: 'Premium Software License' }, description: { description: 'The product description', type: string, maxLength: 50, example: 'Annual license for premium software features' }, available_from: { description: 'Product availability start date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-01-01' }, available_to: { description: 'Product availability end date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-12-31' }, external_cost: { description: 'The external cost of the product', type: number, format: float, default: 0, example: 100.5 }, markup: { description: 'The markup percentage for the product', type: integer, default: 0, example: 20 }, price: { description: 'The final price of the product', type: number, format: float, example: 120.6 } }
+      properties: { name: { description: 'The product name', type: string, maxLength: 50, example: 'Premium Software License' }, description: { description: 'The product description', type: string, default: '', maxLength: 50, example: 'Annual license for premium software features' }, available_from: { description: 'Product availability start date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-01-01' }, available_to: { description: 'Product availability end date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-12-31' }, external_cost: { description: 'The external cost of the product', type: number, format: float, default: 0, example: 100.5 }, markup: { description: 'The markup percentage for the product', type: integer, default: 0, example: 20 }, price: { description: 'The final price of the product', type: number, format: float, example: 120.6 } }
       type: object
     UpdateProductDto:
       properties: { available_from: { description: 'Product availability start date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-01-01' }, available_to: { description: 'Product availability end date. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-12-31' } }
@@ -1379,10 +1394,11 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, name: { type: string, example: 'First project' }, job_order: { type: string, example: jo_001 }, purchase_order: { type: string, example: po_001 }, value: { description: 'The value of the project in K', type: float, example: '1.5' }, probability: { description: 'The probability of the project', type: integer, maximum: 100, minimum: 0, example: '50' }, date_start: { description: 'The first day of month where the project started', type: string, format: date, example: '2024-01-01' }, duration: { description: 'Duration of the project in months', type: integer, minimum: 1, example: '4' }, is_archived: { type: boolean }, archived_on: { description: 'The date the project was archived', type: string, format: date, example: '2024-01-01' }, due_date: { description: 'The date the project is supposed to end', type: string, format: date, example: '2024-01-01' }, signed_on: { description: 'The date the project has been signed', type: string, format: date, example: '2024-01-01' }, job_order_category_id: { description: 'ID of the job order category', type: integer, minimum: 1, example: 1 }, project_type_id: { description: 'ID of the project type', type: integer, minimum: 1, example: 1 }, client_id: { description: 'ID of the client', type: integer, minimum: 1, example: 1 }, pm_id: { description: 'ID of the person who is the project manager', type: integer, minimum: 1, example: 1 }, account_id: { description: 'ID of the person who is the account', type: integer, minimum: 1, example: 1 }, client_contact_id: { description: 'ID of the client contact', type: integer, minimum: 1, example: 1 }, reason_why_id: { description: 'ID of the reason why the project is won or lost', type: integer, minimum: 1, example: 1 }, business_unit_id: { description: 'ID of the business unit', type: integer, minimum: 1, example: 1 }, billing_group_id: { description: 'ID of the billing group the project is in', type: integer, minimum: 1, example: 1 }, deleted_at: { description: 'The date and time when the resource was deleted', type: string, format: date-time } }
       type: object
     CreateProjectDto:
-      required: [name, value, probability, external_cost_percentage, start_date, duration]
+      required: [name, client_id, pm_id, job_order_category_id, value, probability, external_cost_percentage, start_date, duration]
       properties: { name: { description: 'Project name', type: string, maxLength: 500, example: 'Website refactor' }, client_id: { description: 'ID of the client of this project', type: integer, example: 12 }, client_contact_id: { description: 'ID of the client contact for this project. This may be required if it has been configured as such in the company settings.', type: integer, example: 13 }, purchase_order: { description: 'Project purchase order', type: string, example: po_002 }, pm_id: { description: 'ID of the person designed to manage this project', type: integer, example: 2 }, account_id: { description: 'ID of the person designed as account for this project', type: integer, example: 21 }, job_order_category_id: { description: 'ID of the job order category to associate to this project', type: integer, example: 32 }, project_type_id: { description: 'ID of the project type to associate to this project', type: integer, example: 3 }, job_order: { description: 'Project job order', type: string, maxLength: 150, example: jo_001 }, value: { description: 'The value of the project in K', type: float, example: 1.5 }, probability: { description: 'The likelihood of this project actually starting, in percentage', type: integer, maximum: 100, minimum: 0, example: 4 }, external_cost_percentage: { description: 'Estimate of the external costs as percentage of the project value', type: integer, minimum: 0, example: 20 }, start_date: { description: 'Project start month. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-12-01' }, duration: { description: 'The duration of the project in months', type: integer, minimum: 1, example: 50 }, due_date: { description: 'The date the project is supposed to end', type: string, format: date, example: '2025-03-12' }, signed_on: { description: 'The date the project has been signed', type: string, format: date, example: '2024-01-01' }, business_unit_id: { description: 'ID of the business unit to which this project belongs', type: integer, example: 2 } }
       type: object
     UpdateProjectDto:
+      required: [id]
       properties: { name: { description: 'Project name', type: string, maxLength: 500, example: 'Website refactor' }, client_id: { description: 'ID of the client of this project', type: integer, example: 12 }, client_contact_id: { description: 'ID of the client contact for this project', type: integer, example: 13 }, purchase_order: { description: 'Project purchase order', type: string, example: po_002 }, pm_id: { description: 'ID of the person designed to manage this project', type: integer, example: 2 }, account_id: { description: 'ID of the person designed as account for this project', type: integer, example: 21 }, job_order_category_id: { description: 'ID of the job order category to associate to this project', type: integer, example: 32 }, project_type_id: { description: 'ID of the project type to associate to this project', type: integer, example: 3 }, job_order: { description: 'Project job order', type: string, maxLength: 150, example: jo_001 }, value: { description: 'The value of the project in K', type: float, example: 1.5 }, probability: { description: 'Duration of the project in months', type: integer, maximum: 100, minimum: 0, example: 4 }, external_cost_percentage: { description: 'Estimate of the external costs as percentage of the project value', type: integer, minimum: 0, example: 20 }, start_date: { description: 'Project start month. This follows the YYYY-MM-DD format', type: string, format: date, example: '2024-12-01' }, duration: { description: 'The probability of the project', type: integer, minimum: 1, example: 50 }, due_date: { description: 'The date the project is supposed to end', type: string, format: date, example: '2025-03-12' }, signed_on: { description: 'The date the project has been signed', type: string, format: date, example: '2024-01-01' }, business_unit_id: { description: 'ID of the business unit to which this project belongs', type: integer, example: 2 } }
       type: object
     ProjectStatusAreaDto:
@@ -1441,11 +1457,12 @@ components:
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, date: { description: 'The date of the timesheet', type: string, format: date, example: '2024-01-01' }, hours: { description: 'The daily hours of the timesheet', type: float, example: 15.6 }, notes: { description: 'Notes of the timesheet', type: string, example: 'This is a note' }, mode: { description: 'The mode of the timesheet', type: string, example: daily }, project_id: { description: 'ID of the project related to the timesheet', type: integer, minimum: 1, example: 1 }, person_id: { description: 'ID of the person related to the timesheet', type: integer, minimum: 1, example: 1 }, deleted_at: { description: 'The date and time when the resource was deleted', type: string, format: date-time } }
       type: object
     CreateTimesheetDto:
-      required: [date, hours]
-      properties: { date: { description: 'The date of the timesheet', type: string, format: date, example: '2024-01-01' }, hours: { description: 'The hours of the timesheet', type: float, minimum: 0, example: 15.6 }, notes: { description: 'Notes of the timesheet', type: string, example: 'This is a note' }, mode: { description: 'Mode of the timesheet (DAILY, WEEKLY)', type: string, enum: [DAILY, WEEKLY], example: DAILY }, project_id: { description: 'ID of the project related to the timesheet', type: integer, example: 1 }, person_id: { description: 'ID of the person related to the timesheet', type: integer, example: 1 } }
+      required: [date, hours, mode, project_id, person_id]
+      properties: { date: { description: 'The date of the timesheet', type: string, format: date, example: '2024-01-01' }, hours: { description: 'The hours of the timesheet', type: float, minimum: 0, example: 15.6 }, notes: { description: 'Notes of the timesheet', type: string, example: 'This is a note' }, mode: { description: 'Mode of the timesheet (DAILY, WEEKLY)', type: string, enum: [DAILY, WEEKLY], example: DAILY }, project_id: { description: 'ID of the project related to the timesheet', type: integer, minimum: 1, example: 1 }, person_id: { description: 'ID of the person related to the timesheet', type: integer, minimum: 1, example: 1 } }
       type: object
     UpdateTimesheetDto:
-      properties: { id: { description: 'The ID of the timesheet to update', type: integer, example: 1 }, hours: { description: 'The hours of the timesheet', type: float, example: 15.6 }, notes: { description: 'Notes of the timesheet', type: string, example: 'This is a note' }, mode: { description: 'Mode of the timesheet (DAILY, WEEKLY)', type: string, enum: [DAILY, WEEKLY], example: DAILY } }
+      required: [id]
+      properties: { id: { description: 'The ID of the timesheet to update', type: integer, example: 1 }, hours: { description: 'The hours of the timesheet', type: float, minimum: 0, example: 15.6 }, notes: { description: 'Notes of the timesheet', type: string, example: 'This is a note' }, mode: { description: 'Mode of the timesheet (DAILY, WEEKLY)', type: string, enum: [DAILY, WEEKLY], example: DAILY } }
       type: object
     TimesheetLogDto:
       required: [id, created_at, updated_at, person_id, date, project_id, mode]
@@ -1454,6 +1471,9 @@ components:
     WorkHourCapacityDto:
       required: [id, created_at, updated_at, name, monday_minutes, tuesday_minutes, wednesday_minutes, thursday_minutes, friday_minutes, saturday_minutes, sunday_minutes, is_default]
       properties: { id: { description: 'The unique identifier of the resource', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, name: { description: 'The capacity name', type: string, maxLength: 255, example: Full-time }, monday_minutes: { description: 'Minutes available on Monday', type: integer, maximum: 480, minimum: 0, example: 480 }, tuesday_minutes: { description: 'Minutes available on Tuesday', type: integer, maximum: 480, minimum: 0, example: 480 }, wednesday_minutes: { description: 'Minutes available on Wednesday', type: integer, maximum: 480, minimum: 0, example: 480 }, thursday_minutes: { description: 'Minutes available on Thursday', type: integer, maximum: 480, minimum: 0, example: 480 }, friday_minutes: { description: 'Minutes available on Friday', type: integer, maximum: 480, minimum: 0, example: 480 }, saturday_minutes: { description: 'Minutes available on Saturday', type: integer, maximum: 480, minimum: 0, example: 0 }, sunday_minutes: { description: 'Minutes available on Sunday', type: integer, maximum: 480, minimum: 0, example: 0 }, is_default: { description: 'Whether this capacity is the default one', type: boolean, example: false } }
+      type: object
+    ResponseHeaderBag:
+      properties: {  }
       type: object
   parameters:
     CompanyHeader:
@@ -1479,106 +1499,71 @@ security:
 tags:
   -
     name: Budget
-    description: Budget
   -
     name: 'Budget Area'
-    description: 'Budget Area'
   -
     name: 'Budget Day'
-    description: 'Budget Day'
   -
     name: 'Budget Job Title'
-    description: 'Budget Job Title'
   -
     name: 'Budget Price List Level'
-    description: 'Budget Price List Level'
   -
     name: 'Budget Task'
-    description: 'Budget Task'
   -
     name: 'Business Unit'
-    description: 'Business Unit'
   -
     name: Client
-    description: Client
   -
     name: Contact
-    description: Contact
   -
     name: Payroll
-    description: Payroll
   -
     name: Holiday
-    description: Holiday
   -
     name: Invoice
-    description: Invoice
   -
     name: 'Job title'
-    description: 'Job title'
   -
     name: Level
-    description: Level
   -
     name: Location
-    description: Location
   -
     name: 'Project Metadata'
-    description: 'Project Metadata'
   -
     name: 'People allocation'
-    description: 'People allocation'
   -
     name: Person
-    description: Person
   -
     name: 'Price list'
-    description: 'Price list'
   -
     name: 'Price list level'
-    description: 'Price list level'
   -
     name: Product
-    description: Product
   -
     name: 'Product Level'
-    description: 'Product Level'
   -
     name: Production
-    description: Production
   -
     name: 'Production plan'
-    description: 'Production plan'
   -
     name: 'Production plan stream'
-    description: 'Production plan stream'
   -
     name: 'Production stream'
-    description: 'Production stream'
   -
     name: Project
-    description: Project
   -
     name: 'Project status'
-    description: 'Project status'
   -
     name: 'Job Order Category'
-    description: 'Job Order Category'
   -
     name: 'Job Order Category Group'
-    description: 'Job Order Category Group'
   -
     name: Role
-    description: Role
   -
     name: Stream
-    description: Stream
   -
     name: Timesheet
-    description: Timesheet
   -
     name: 'Timesheet Log'
-    description: 'Timesheet Log'
   -
     name: Capacity
-    description: Capacity
