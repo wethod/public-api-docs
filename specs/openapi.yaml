@@ -1063,6 +1063,15 @@ paths:
       parameters: [{ name: id, in: path, description: 'The ID of the project plan area to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/PatchProjectPlanAreaDto' } } } }
       responses: { 200: { description: 'Returns the project plan area updated.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectPlanAreaDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
+  '/api/project-plans:set-enabled':
+    post:
+      tags: ['Project plan']
+      summary: 'Enable or disable a project plan area, task, or subtask'
+      description: "It applies the cascade rules across the\narea → task → subtask hierarchy. Returns the full owning area tree after the change.\n\nRequired permissions:\n- **project_plan.edit**: allows updating project plan entities.\n\nCascade rules:\n- **Area**: enable/disable cascades to all its tasks and subtasks.\n- **Task**: disable cascades to its subtasks; enable also enables the parent area (siblings untouched).\n- **Subtask**: enable also enables the parent task and area; disable leaves parents untouched."
+      operationId: setProjectPlanEnabled
+      requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/SetProjectPlanEnabledDto' } } } }
+      responses: { 200: { description: 'Returns the full owning area tree (area → tasks → subtasks) after the enabled cascade.', content: { application/json: { schema: { type: object }, example: { id: 1, name: Design, enabled: false, project_plan_tasks: [{ id: 10, enabled: false, project_plan_subtasks: [{ id: 100, enabled: false }] }] } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
+      parameters: [{ $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
   /api/project-plan-subtask-assignees:
     get:
       tags: ['Project plan subtask assignee']
@@ -1841,6 +1850,10 @@ components:
       required: [id]
       properties: { name: { description: 'The name of the project plan area', type: string, maxLength: 255, example: Design } }
       type: object
+    SetProjectPlanEnabledDto:
+      required: [type, id, enabled]
+      properties: { type: { description: 'The type of project plan entity to enable/disable', type: string, enum: [area, task, subtask], example: area }, id: { description: 'The ID of the project plan entity to enable/disable', type: integer, example: 1 }, enabled: { description: 'Whether the entity should be enabled. Cascades across the area/task/subtask hierarchy.', type: boolean, example: false } }
+      type: object
     ProjectPlanSubtaskAssigneeDto:
       required: [id, created_at, updated_at, employee_id, project_plan_subtask_id, hours]
       properties: { id: { description: 'The ID of the project plan subtask assignee', type: integer, minimum: 1, example: 1 }, created_at: { description: 'The date and time when the resource was created', type: string, format: date-time }, updated_at: { description: 'The date and time when the resource was last updated', type: string, format: date-time }, employee_id: { description: 'The ID of the assigned employee', type: integer, minimum: 1, example: 1 }, project_plan_subtask_id: { description: 'The ID of the project plan subtask this assignee is attached to', type: integer, minimum: 1, example: 1 }, hours: { description: 'The number of hours allocated to this assignee', type: integer, minimum: 0, exclusiveMinimum: true, example: 8 }, strategy: { description: 'The allocation strategy used by the assignee', type: string, enum: [front, even], example: even, nullable: true } }
@@ -2060,6 +2073,8 @@ tags:
     name: 'Project Type'
   -
     name: 'Project plan area'
+  -
+    name: 'Project plan'
   -
     name: 'Project plan subtask assignee'
   -
