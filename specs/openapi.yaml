@@ -1484,14 +1484,14 @@ paths:
     get:
       tags: ['Timesheet whitelist']
       summary: 'List timesheet whitelists'
-      description: ":::warning\nHaving people in the project whitelist takes effect only if the whitelist is enabled for the project.\nCheck [here](/reference/get-project) whether the whitelist is enabled for your project.\n :::\n\nRequired permissions:\n- **pipeline.view**: allows view resources of projects where the user is the PM or the Account.\n- **pipeline.view_other**: allows view resources of projects where the user is not the PM nor the Account."
+      description: ":::warning\nThe whitelist is enforced only when both of these hold:\n- the whitelist is enabled for the project (check it [here](/reference/get-project));\n- the person tracking time lacks the **time_tracking.bypass_whitelist** permission.\n\nThat permission bypasses the whitelist on every project, whether tracking time for\nthemselves or for someone else.\n:::\n\nRequired permissions:\n- **pipeline.view**: allows view resources of projects where the user is the PM or the Account.\n- **pipeline.view_other**: allows view resources of projects where the user is not the PM nor the Account."
       operationId: listTimesheetWhitelists
       parameters: [{ name: project_id, in: query, description: 'Filter items by the project_id field.', required: false, schema: { type: integer, default: null, minimum: 0 } }, { name: person_id, in: query, description: 'Filter items by the person_id field.', required: false, schema: { type: integer, default: null, minimum: 0 } }, { name: limit, in: query, description: 'The number of items to include in the response.', required: false, schema: { type: integer, default: 100, maximum: 100, minimum: 1 } }, { name: offset, in: query, description: 'The offset of the first returned item.', required: false, schema: { type: integer, default: 0, minimum: 0 } }, { name: updated_at, in: query, description: 'Filter items by the updated_at field.', required: false, schema: { type: string, format: date-time, default: null }, x-operators: [{ summary: Equal, usage: 'eq:{value}', description: null }, { summary: 'Not equal', usage: 'neq:{value}', description: null }, { summary: 'Greater than', usage: 'gt:{value}', description: null }, { summary: 'Greater than or equal', usage: 'gte:{value}', description: null }, { summary: 'Less than', usage: 'lt:{value}', description: null }, { summary: 'Less than or equal', usage: 'lte:{value}', description: null }, { summary: 'In list', usage: 'in:{value_1},{value_2},{value_3}', description: null }, { summary: 'Not in list', usage: 'nin:{value_1},{value_2},{value_3}', description: null }, { summary: Between, usage: 'bt:{value_min},{value_max}', description: 'The given values are inclusive.' }] }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the list of timesheet whitelists.', content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/TimesheetWhitelistDto' } } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
     post:
       tags: ['Timesheet whitelist']
       summary: 'Create a timesheet whitelist'
-      description: "Adds a person to the timesheet whitelist of a project.\n\n:::warning\nAdding people to the project whitelist takes effect only if the whitelist is enabled for the project.\nCheck [here](/reference/get-project) whether the whitelist is enabled for your project.\n:::\n\nRequired permissions:\n- **pipeline.edit**: allows managing the timesheet whitelist of projects where the user is the PM or the Account.\n- **pipeline.edit_other**: allows managing the timesheet whitelist of projects where the user is not the PM nor the Account."
+      description: "Adds a person to the timesheet whitelist of a project.\n\n:::warning\nThe whitelist is enforced only when both of these hold:\n- the whitelist is enabled for the project (check it [here](/reference/get-project));\n- the person tracking time lacks the **time_tracking.bypass_whitelist** permission.\n\nThat permission bypasses the whitelist on every project, whether tracking time for\nthemselves or for someone else.\n:::\n\nRequired permissions:\n- **pipeline.edit**: allows managing the timesheet whitelist of projects where the user is the PM or the Account.\n- **pipeline.edit_other**: allows managing the timesheet whitelist of projects where the user is not the PM nor the Account."
       operationId: createTimesheetWhitelist
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/CreateTimesheetWhitelistDto' } } } }
       responses: { 201: { description: 'Returns the timesheet whitelist created.', content: { application/json: { schema: { $ref: '#/components/schemas/TimesheetWhitelistDto' } } } }, 409: { description: 'The person is already in the timesheet whitelist of the project.', content: { application/json: { schema: { $ref: '#/components/schemas/ConflictResponse' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
@@ -1500,14 +1500,14 @@ paths:
     get:
       tags: ['Timesheet whitelist']
       summary: 'Get a timesheet whitelist'
-      description: ":::warning\nHaving people in the project whitelist takes effect only if the whitelist is enabled for the project.\nCheck [here](/reference/get-project) whether the whitelist is enabled for your project.\n:::\n\nRequired permissions:\n- **pipeline.view**: allows view resources of projects where the user is the PM or the Account.\n- **pipeline.view_other**: allows view resources of projects where the user is not the PM nor the Account."
+      description: ":::warning\nThe whitelist is enforced only when both of these hold:\n- the whitelist is enabled for the project (check it [here](/reference/get-project));\n- the person tracking time lacks the **time_tracking.bypass_whitelist** permission.\n\nThat permission bypasses the whitelist on every project, whether tracking time for\nthemselves or for someone else.\n:::\n\nRequired permissions:\n- **pipeline.view**: allows view resources of projects where the user is the PM or the Account.\n- **pipeline.view_other**: allows view resources of projects where the user is not the PM nor the Account."
       operationId: getTimesheetWhitelist
       parameters: [{ name: id, in: path, description: 'The ID of the timesheet whitelist to view', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Returns the requested timesheet whitelist.', content: { application/json: { schema: { $ref: '#/components/schemas/TimesheetWhitelistDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
     delete:
       tags: ['Timesheet whitelist']
       summary: 'Delete a timesheet whitelist'
-      description: "Removes a person from the timesheet whitelist of a project.\n\n:::warning\nRemoving people from the project whitelist takes effect only if the whitelist is enabled for the project.\nCheck [here](/reference/get-project) whether the whitelist is enabled for your project.\n:::\n\nRequired permissions:\n- **pipeline.edit**: allows managing the timesheet whitelist of projects where the user is the PM or the Account.\n- **pipeline.edit_other**: allows managing the timesheet whitelist of projects where the user is not the PM nor the Account."
+      description: "Removes a person from the timesheet whitelist of a project.\n\n:::warning\nThe whitelist is enforced only when both of these hold:\n- the whitelist is enabled for the project (check it [here](/reference/get-project));\n- the person tracking time lacks the **time_tracking.bypass_whitelist** permission.\n\nThat permission bypasses the whitelist on every project, whether tracking time for\nthemselves or for someone else.\n:::\n\nRequired permissions:\n- **pipeline.edit**: allows managing the timesheet whitelist of projects where the user is the PM or the Account.\n- **pipeline.edit_other**: allows managing the timesheet whitelist of projects where the user is not the PM nor the Account."
       operationId: deleteTimesheetWhitelist
       parameters: [{ name: id, in: path, description: 'The ID of the timesheet whitelist to delete', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Timesheet whitelist successfully deleted.' }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
@@ -2024,6 +2024,8 @@ tags:
   -
     name: 'Business Unit'
   -
+    name: Capacity
+  -
     name: Client
   -
     name: Contact
@@ -2032,11 +2034,13 @@ tags:
   -
     name: 'Custom Field Option'
   -
-    name: Payroll
-  -
     name: Holiday
   -
     name: Invoice
+  -
+    name: 'Job Order Category'
+  -
+    name: 'Job Order Category Group'
   -
     name: 'Job title'
   -
@@ -2044,13 +2048,13 @@ tags:
   -
     name: Location
   -
-    name: 'Project Metadata'
+    name: Payroll
   -
     name: 'People allocation'
   -
-    name: 'Person Capacity'
-  -
     name: Person
+  -
+    name: 'Person Capacity'
   -
     name: 'Price list'
   -
@@ -2070,27 +2074,25 @@ tags:
   -
     name: Project
   -
-    name: 'Project Type'
-  -
-    name: 'Project plan area'
+    name: 'Project Metadata'
   -
     name: 'Project plan'
   -
-    name: 'Project plan subtask assignee'
+    name: 'Project plan area'
   -
     name: 'Project plan subtask'
   -
-    name: 'Project plan task assignee'
+    name: 'Project plan subtask assignee'
   -
     name: 'Project plan task'
+  -
+    name: 'Project plan task assignee'
   -
     name: 'Project Stage'
   -
     name: 'Project status'
   -
-    name: 'Job Order Category'
-  -
-    name: 'Job Order Category Group'
+    name: 'Project Type'
   -
     name: Role
   -
@@ -2101,5 +2103,3 @@ tags:
     name: 'Timesheet Log'
   -
     name: 'Timesheet whitelist'
-  -
-    name: Capacity
