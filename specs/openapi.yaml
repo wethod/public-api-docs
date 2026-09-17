@@ -1085,9 +1085,9 @@ paths:
       summary: 'Create a project plan subtask assignee (assign an employee to a subtask)'
       description: "Required permissions:\n- **project_plan.edit**: allows the creation of project plan subtask assignees."
       operationId: createProjectPlanSubtaskAssignee
+      parameters: [{ name: include, in: query, description: "Include one or more relations in the response, separated by commas.\n\nWhen available, use dot-notation to retrieve nested relations.\n\nYou can request any level of a nested relation, (e.g. `relation` or `relation.nested` or `relation.nested.deeplyNested`).", required: false, schema: { type: string, default: null, enum: [person] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/PublicCreateProjectPlanSubtaskAssigneeDto' } } } }
       responses: { 201: { description: 'Returns the project plan subtask assignee created.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectPlanSubtaskAssigneeDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
-      parameters: [{ $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
   '/api/project-plan-subtask-assignees/{id}':
     get:
       tags: ['Project plan subtask assignee']
@@ -1108,7 +1108,7 @@ paths:
       summary: 'Update a project plan subtask assignee'
       description: "Required permissions:\n- **project_plan.edit**: allows the update of project plan subtask assignees."
       operationId: updateProjectPlanSubtaskAssignee
-      parameters: [{ name: id, in: path, description: 'The ID of the project plan subtask assignee to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the project plan subtask assignee to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: include, in: query, description: "Include one or more relations in the response, separated by commas.\n\nWhen available, use dot-notation to retrieve nested relations.\n\nYou can request any level of a nested relation, (e.g. `relation` or `relation.nested` or `relation.nested.deeplyNested`).", required: false, schema: { type: string, default: null, enum: [person] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/PatchProjectPlanEffortDto' } } } }
       responses: { 200: { description: 'Returns the project plan subtask assignee updated.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectPlanSubtaskAssigneeDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
   /api/project-plan-subtasks:
@@ -1163,9 +1163,9 @@ paths:
       summary: 'Create a project plan task assignee (assign an employee to a task)'
       description: "Required permissions:\n- **project_plan.edit**: allows the creation of project plan task assignees."
       operationId: createProjectPlanTaskAssignee
+      parameters: [{ name: include, in: query, description: "Include one or more relations in the response, separated by commas.\n\nWhen available, use dot-notation to retrieve nested relations.\n\nYou can request any level of a nested relation, (e.g. `relation` or `relation.nested` or `relation.nested.deeplyNested`).", required: false, schema: { type: string, default: null, enum: [person] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/PublicCreateProjectPlanTaskAssigneeDto' } } } }
       responses: { 201: { description: 'Returns the project plan task assignee created.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectPlanTaskAssigneeDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
-      parameters: [{ $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
   '/api/project-plan-task-assignees/{id}':
     get:
       tags: ['Project plan task assignee']
@@ -1186,7 +1186,7 @@ paths:
       summary: 'Update a project plan task assignee'
       description: "Required permissions:\n- **project_plan.edit**: allows the update of project plan task assignees."
       operationId: updateProjectPlanTaskAssignee
-      parameters: [{ name: id, in: path, description: 'The ID of the project plan task assignee to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
+      parameters: [{ name: id, in: path, description: 'The ID of the project plan task assignee to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { name: include, in: query, description: "Include one or more relations in the response, separated by commas.\n\nWhen available, use dot-notation to retrieve nested relations.\n\nYou can request any level of a nested relation, (e.g. `relation` or `relation.nested` or `relation.nested.deeplyNested`).", required: false, schema: { type: string, default: null, enum: [person] } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/PatchProjectPlanEffortDto' } } } }
       responses: { 200: { description: 'Returns the project plan task assignee updated.', content: { application/json: { schema: { $ref: '#/components/schemas/ProjectPlanTaskAssigneeDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
   /api/project-plan-tasks:
@@ -1860,11 +1860,11 @@ components:
       type: object
     PublicCreateProjectPlanSubtaskAssigneeDto:
       required: [hours, employee_id, project_plan_subtask_id]
-      properties: {  }
+      properties: { include: { type: string } }
       type: object
     PatchProjectPlanEffortDto:
       required: [id]
-      properties: {  }
+      properties: { include: { type: string } }
       type: object
     ProjectPlanSubtaskDto:
       required: [id, created_at, updated_at, name, sort, project_plan_task_id]
@@ -1884,7 +1884,7 @@ components:
       type: object
     PublicCreateProjectPlanTaskAssigneeDto:
       required: [hours, employee_id, project_plan_task_id]
-      properties: {  }
+      properties: { include: { type: string } }
       type: object
     ProjectPlanTaskDto:
       required: [id, created_at, updated_at, name, sort, project_plan_area_id]
