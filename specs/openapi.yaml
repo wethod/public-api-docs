@@ -736,7 +736,7 @@ paths:
     post:
       tags: ['Person Capacity']
       summary: 'Create a person capacity'
-      description: "Required permissions:\n- **settings.team**: allows creating person capacities."
+      description: "Required permissions:\n- **team.edit_user**: allows creating person capacities."
       operationId: createPersonCapacity
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/CreateEmployeeWorkHourCapacityDto' } } } }
       responses: { 201: { description: 'Returns the person capacity created.', content: { application/json: { schema: { $ref: '#/components/schemas/EmployeeWorkHourCapacityDto' } } } }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
@@ -751,14 +751,14 @@ paths:
     delete:
       tags: ['Person Capacity']
       summary: 'Delete a person capacity'
-      description: "Required permissions:\n- **settings.team**: allows deleting person capacities."
+      description: "Required permissions:\n- **team.edit_user**: allows deleting person capacities."
       operationId: deletePersonCapacity
       parameters: [{ name: id, in: path, description: 'The ID of the person capacity to delete', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Person capacity successfully deleted.' }, 400: { description: 'Validation failed', content: { application/json: { schema: { $ref: '#/components/schemas/ValidationFailedResponse' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } } }
     patch:
       tags: ['Person Capacity']
       summary: 'Update a person capacity'
-      description: "Required permissions:\n- **settings.team**: allows updating person capacities."
+      description: "Required permissions:\n- **team.edit_user**: allows updating person capacities."
       operationId: updatePersonCapacity
       parameters: [{ name: id, in: path, description: 'The ID of the person capacity to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/UpdateEmployeeWorkHourCapacityDto' } } } }
@@ -790,7 +790,7 @@ paths:
     patch:
       tags: [Person]
       summary: 'Update a person'
-      description: "Required permissions:\n- **settings.team**: allows update of company persons.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#team)."
+      description: "Required permissions:\n- **team.edit_user**: allows update of company persons.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#team)."
       operationId: updatePerson
       parameters: [{ name: id, in: path, description: 'The ID of the person to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/PatchEmployeeDto' } } } }
@@ -1412,7 +1412,7 @@ paths:
     post:
       tags: [Stream]
       summary: 'Attach member to stream'
-      description: ":::warning\nRequires **Streams** to be enabled in company settings.\n:::\n\nThis endpoint allows you to attach a member to a stream\n\nRequired permissions:\n- **settings.team**: allows attaching members to streams."
+      description: ":::warning\nRequires **Streams** to be enabled in company settings.\n:::\n\nThis endpoint allows you to attach a member to a stream\n\nRequired permissions:\n- **team.edit_user**: allows attaching members to streams."
       operationId: attachMemberToStream
       parameters: [{ name: stream_id, in: path, description: 'The ID of the stream', required: true, schema: { type: string, pattern: '[0-9]+' } }, { name: member_id, in: path, description: 'The ID of the person to attach to the stream as member', required: true, schema: { type: string, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       responses: { 200: { description: 'Member successfully attached to the stream.', content: { application/json: { schema: { $ref: '#/components/schemas/StreamMemberDto' } } } }, 401: { description: Unauthorized, content: { application/json: { schema: { $ref: '#/components/schemas/UnauthorizedResponse' } } } }, 403: { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/ForbiddenResponse' } } } }, 404: { description: 'Not found', content: { application/json: { schema: { $ref: '#/components/schemas/NotFoundResponse' } } } }, 412: { description: 'Precondition failed', content: { application/json: { schema: { $ref: '#/components/schemas/PreconditionFailedResponse' } } } } }
