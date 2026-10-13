@@ -805,7 +805,7 @@ paths:
     patch:
       tags: [Person]
       summary: 'Update a person'
-      description: "Required permissions:\n- **team.edit_user**: allows update of company persons.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#team)."
+      description: "Required permissions:\n- **team.edit_user** or **team.edit_placeholder**: allows update of placeholder persons.\n- **team.edit_user**: allows update of invited and active persons.\n\n[Here the dedicated support page](https://support.wethod.com/settings/index/#team)."
       operationId: updatePerson
       parameters: [{ name: id, in: path, description: 'The ID of the person to update', required: true, schema: { type: integer, pattern: '[0-9]+' } }, { $ref: '#/components/parameters/CompanyHeader' }, { $ref: '#/components/parameters/ApiVersionHeader' }]
       requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/PatchEmployeeDto' } } } }
