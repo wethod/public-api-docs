@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Create a project | wethod API docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.wethod.com/img/wethod-social-card.png"><meta data-rh="true" name="twitter:image" content="https://docs.wethod.com/img/wethod-social-card.png"><meta data-rh="true" property="og:url" content="https://docs.wethod.com/reference/create-project"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Create a project | wethod API docs"><meta data-rh="true" name="description" content="Required permissions:"><meta data-rh="true" property="og:description" content="Required permissions:"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.wethod.com/reference/create-project"><link data-rh="true" rel="alternate" href="https://docs.wethod.com/reference/create-project" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.wethod.com/reference/create-project" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Create a project","item":"https://docs.wethod.com/reference/create-project"}]}</script><link rel="stylesheet" href="/assets/css/styles.8ee76d28.css">
-<script src="/assets/js/runtime~main.61d7a62f.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b4bd6f72.js" defer="defer"></script>
 <script src="/assets/js/main.990d273f.js" defer="defer"></script>
 </head>
 <body>
@@ -24,6 +24,12 @@
 <strong>dynamic field</strong> like <code>metadata_13</code> where <code>13</code> is the ID of the project metadata you want to set.</p>
 <p>You can get all the available project metadata using <a class="" href="/reference/list-metadata">the related endpoint</a>.</p>
 <p>Only project metadata with a value will appear in the response.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="custom-fields">Custom fields<a href="#custom-fields" class="hash-link" aria-label="Direct link to Custom fields" title="Direct link to Custom fields" translate="no">​</a></h3>
+<p>Set <a class="" href="/reference/list-custom-fields">custom fields</a> of the <code>project</code> domain using <strong>dynamic fields</strong> named like
+<code>custom_field_55</code> where <code>55</code> is the ID of the custom field; the value is the ID of the option to select for
+single-option fields, a number for number fields, a <code>YYYY-MM-DD</code> date for date fields, a string of at most 255
+characters for text fields (trimmed; blank means unset), a Markdown string with no length limit for long text
+fields (blank means unset), or <code>null</code> to leave it unset.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timesheet-whitelist">Timesheet whitelist<a href="#timesheet-whitelist" class="hash-link" aria-label="Direct link to Timesheet whitelist" title="Direct link to Timesheet whitelist" translate="no">​</a></h3>
 <p>You can enable the timesheet whitelist for the project using <code>is_timesheet_whitelist_enabled</code>.
 People can then be added to the whitelist using the <a class="" href="/reference/create-timesheet-whitelist">timesheet whitelist endpoints</a>.</p>
